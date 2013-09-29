@@ -1,6 +1,6 @@
 WebService::Gyazo
 =================
-WebService::Gyazo - perl libery for working with gyazo.com
+WebService::Gyazo - perl image upload library for gyazo.com
 
  
 INSTALLATION
