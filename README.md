@@ -16,10 +16,10 @@ DEPENDENCIES
  
 This module requires these other modules and libraries:
  
-LWP
-LWP::UserAgent
-LWP::Protocol::socks
-HTTP::Request::Common
+	LWP
+	LWP::UserAgent
+	LWP::Protocol::socks
+	HTTP::Request::Common
  
 COPYRIGHT AND LICENCE
  
