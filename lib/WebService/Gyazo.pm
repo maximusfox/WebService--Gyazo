@@ -8,6 +8,7 @@ use WebService::Gyazo::Image;
 use LWP::UserAgent;
 use LWP::Protocol::socks;
 use HTTP::Request::Common;
+use URI::Simple;
 
 our $VERSION = 0.01;
 
@@ -44,7 +45,12 @@ sub setProxy {
 	if ($proxyStr) {
 		
 		#  Выбираем из него ip и port
-		my ($protocol, $ip, $port) = $proxyStr =~ m#(\w+)://(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5})#;
+		#my ($protocol, $ip, $port) = $proxyStr =~ m#(\w+)://(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5})#;
+
+		my $proxyUrl = URI::Simple->new($proxyStr);
+		my ($protocol, $ip, $port) = ( $proxyUrl->protocol, $proxyUrl->host, ($proxyUrl->port || '80') );
+		#print "\n\$protocol=$protocol\n\$ip=$ip\n\$port=$port\n";
+
 		if ( defined($protocol) and defined($ip) and defined($port) ) {
 			
 			unless ( $protocol eq HTTP_PROXY or $protocol eq HTTPS_PROXY or $protocol eq SOCKS4_PROXY or $protocol eq SOCKS5_PROXY ) {

@@ -25,7 +25,7 @@ for my $protocol (@protocols_ok) {
 	for my $ip (@ips_ok) {
 		for my $ports (@ports_ok) {
 			my $proxy = $protocol.'://'.$ip.':'.$ports;
-			is($ua->setProxy($proxy), 1, '$ua->setProxy("'.$proxy.'") == 1');
+			is($ua->setProxy($proxy), 1, '$ua->setProxy("'.$proxy.'") == 1 - '.$ua->error);
 		}
 	}
 }
