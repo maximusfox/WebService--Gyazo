@@ -150,7 +150,6 @@ sub uploadFile {
 
 __END__
 
-
 =head1 NAME
 
 WebService::Gyazo - perl image upload library for gyazo.com
@@ -232,23 +231,6 @@ This method set new gyazo user id.
 
 This metod return object WebService::Gyazo::Image.
 
-=head1 METHODS WebService::Gyazo::Image
-
-=head2 C<getSiteUrl>
-
-This method return string like this:
-	http://gyazo.com/11111111111111111
-
-=head2 C<getImageUrl>
-
-This method return string like this:
-	http://gyazo.com/11111111111111111.png
-
-=head2 C<getImageId>
-
-This method return string like this:
-	11111111111111111
-
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
@@ -257,7 +239,7 @@ You can find documentation for this module with the perldoc command.
 
 =head1 SEE ALSO
 
-L<Acme::Plack::App::GyazoStocker>, L<LWP::UserAgent>.
+L<WebService::Gyazo::Image>, L<LWP::UserAgent>.
 
 =head1 AUTHOR
 
