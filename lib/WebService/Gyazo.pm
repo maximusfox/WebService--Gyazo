@@ -59,7 +59,7 @@ sub setProxy {
 			}
 
 			# Проверяем правильность введённых значений
-			if ( $self->validIp($ip) && $port <= 65535 ) {
+			if ( $port <= 65535 ) {
 				$self->{proxy} = $protocol.'://'.$ip.':'.$port;
 				return 1;
 			} else {
