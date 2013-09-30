@@ -151,5 +151,125 @@ sub uploadFile {
 __END__
 
 
+=head1 NAME
+
+WebService::Gyazo - perl image upload library for gyazo.com
+
+=head1 SYNOPSIS
+
+	use WebService::Gyazo;
+	
+	my $newUserId = time();
+
+	my $upAgent = WebService::Gyazo->new(id => $newUserId);
+	print "Set user id [".$newUserId."]\n";
+
+	my $image = $upAgent->uploadFile('1.jpg');
+
+	unless ($upAgent->isError) {
+		print "Image uploaded [".$image->getImageUrl()."]\n";
+	} else {
+		print "Error:\n".$upAgent->error()."\n\n";
+	}
+
+=head1 DESCRIPTION
+
+B<WebService::Gyazo> helps you to upload images to gyazo.com (via regular expressions and LWP).
+
+=head1 METHODS
+
+=head2 C<new>
+
+	my $userID = time();
+	my $wsd = WebService::Gyazo->new(id => $userID);
+
+Constructs a new C<WebService::Gyazo> object.
+Parameter id is optional, if the parameter is not passed, it will take the value of the time() function.
+
+=head2 C<setProxy>
+
+	my $proxy = 'http://1.2.3.4:8080';
+	if ($wsd->setProxy($proxy)) {
+		print "Proxy [".$proxy."] seted!";
+	} else {
+		print "Proxy not seted! Error [".$wsd->error."]";
+	}
+
+Set proxy C<1.2.3.4:8080> and protocol http for C<LWP::UserAgent> object.
+
+=head2 C<error>
+
+	print "Error [".$wsd->error."]" if ($wsd->isError);
+
+This method return text of last error.
+
+=head2 C<isError>
+
+	print "Error [".$wsd->error."]" if ($wsd->isError);
+
+This method return 1 if $wsd->{error} not undef, else return 0.
+
+=head2 C<setId>
+
+	my $newUserId = time();
+	if ($wsd->setId($newUserId)) {
+		print "User id [".$newUserId."] seted!";
+	} else {
+		print "User id not seted! Error [".$wsd->error."]";
+	}
+
+This method set new gyazo user id.
+
+=head2 C<uploadFile>
+
+	my $result = $upAgent->uploadFile('1.jpg');
+
+	if (defined($result) and !$upAgent->isError) {
+		print "Returned result[".$result->getImageUrl()."]\n";
+	} else {
+		print "Error:\n".$upAgent->error()."\n\n";
+	}
+
+This metod return object WebService::Gyazo::Image.
+
+=head1 METHODS WebService::Gyazo::Image
+
+=head2 C<getSiteUrl>
+
+This method return string like this:
+	http://gyazo.com/11111111111111111
+
+=head2 C<getImageUrl>
+
+This method return string like this:
+	http://gyazo.com/11111111111111111.png
+
+=head2 C<getImageId>
+
+This method return string like this:
+	11111111111111111
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc WebService::Gyazo
+
+=head1 SEE ALSO
+
+L<Acme::Plack::App::GyazoStocker>, L<LWP::UserAgent>.
+
+=head1 AUTHOR
+
+SHok, <shok at cpan.org> (L<http://nig.org.ua/>)
+
+=head1 COPYRIGHT
+
+Copyright 2013-2014 by SHok
+
+This library is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself.
+
+=cut
 
 1;
