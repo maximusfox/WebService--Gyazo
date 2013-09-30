@@ -16,6 +16,7 @@ WriteMakefile(
         'LWP::UserAgent' => 0,
         'LWP::Protocol::socks' => 0,
         'HTTP::Request::Common' => 0,
+        'URI::Simple' => 0,
     },
     BUILD_REQUIRES => {
         'Test::More' => 0.88

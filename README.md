@@ -20,6 +20,7 @@ This module requires these other modules and libraries:
 	LWP::UserAgent
 	LWP::Protocol::socks
 	HTTP::Request::Common
+	URI::Simple
  
 COPYRIGHT AND LICENCE
  
