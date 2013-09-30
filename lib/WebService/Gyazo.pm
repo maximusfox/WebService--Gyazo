@@ -148,51 +148,6 @@ sub uploadFile {
 	
 }
 
-sub validIp {
-	my ($self, $ip) = @_;
-
-	unless ( $ip ) {
-	 	$self->{error} = 'Your ip is not available!';
-	 	return 0;
-	}
-
-	unless ( $ip =~ m/^[\d\.]+$/ ) {
-		$self->{error} = 'Invalid characters in the IP ['.$ip.']';
-		return 0; 
-	}
-
-	if ($ip =~ m/^\./) {
-		$self->{error} = 'Invalid IP '.$ip.' - begins with a dot';
-		return 0; 
-	}
-
-	if ($ip =~ m/\.$/) {
-		$self->{error} = 'Invalid IP '.$ip.' - ends with a dot';
-		return 0; 
-	}
-	
-	# Число октетов
-	unless ( 3 == ($ip =~ tr/\./\./) ) {
-		$self->{error} = 'Error - IP address must have 4 octets';
-		return 0; 
-	}
-	# Проверка пустых октетов
-	if ($ip =~ m/\.\./) {
-		$self->{error} = 'Do not specify a part IP - two dots are one after another';
-		return 0; 
-	}
-
-	# Проверка на допустимый диапазон значений в октете
-	foreach (split /\./, $ip) {
-		unless ($_ >= 0 && $_ < 256 && $_ !~ /^0\d{1,2}$/ ) {
-			$self->{error} = 'Invalid value in the IP address ['.$ip.'] - '.$_;
-			return 0; 
-		}
-	}
-	
-	return 1;
-}
-
 __END__
 
 
