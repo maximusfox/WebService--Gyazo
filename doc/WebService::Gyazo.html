@@ -1,0 +1,139 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#METHODS">METHODS</a>
+    <ul>
+      <li><a href="#new">new</a></li>
+      <li><a href="#setProxy">setProxy</a></li>
+      <li><a href="#error">error</a></li>
+      <li><a href="#isError">isError</a></li>
+      <li><a href="#setId">setId</a></li>
+      <li><a href="#uploadFile">uploadFile</a></li>
+    </ul>
+  </li>
+  <li><a href="#SUPPORT">SUPPORT</a></li>
+  <li><a href="#SEE-ALSO">SEE ALSO</a></li>
+  <li><a href="#AUTHOR">AUTHOR</a></li>
+  <li><a href="#COPYRIGHT">COPYRIGHT</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>WebService::Gyazo - perl image upload library for gyazo.com</p>
+
+<h1 id="SYNOPSIS">SYNOPSIS</h1>
+
+<pre><code>        use WebService::Gyazo;
+        
+        my $newUserId = time();
+
+        my $upAgent = WebService::Gyazo-&gt;new(id =&gt; $newUserId);
+        print &quot;Set user id [&quot;.$newUserId.&quot;]\n&quot;;
+
+        my $image = $upAgent-&gt;uploadFile(&#39;1.jpg&#39;);
+
+        unless ($upAgent-&gt;isError) {
+                print &quot;Image uploaded [&quot;.$image-&gt;getImageUrl().&quot;]\n&quot;;
+        } else {
+                print &quot;Error:\n&quot;.$upAgent-&gt;error().&quot;\n\n&quot;;
+        }</code></pre>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p><b>WebService::Gyazo</b> helps you to upload images to gyazo.com (via regular expressions and LWP).</p>
+
+<h1 id="METHODS">METHODS</h1>
+
+<h2 id="new"><code>new</code></h2>
+
+<pre><code>        my $userID = time();
+        my $wsd = WebService::Gyazo-&gt;new(id =&gt; $userID);</code></pre>
+
+<p>Constructs a new <code>WebService::Gyazo</code> object. Parameter id is optional, if the parameter is not passed, it will take the value of the time() function.</p>
+
+<h2 id="setProxy"><code>setProxy</code></h2>
+
+<pre><code>        my $proxy = &#39;http://1.2.3.4:8080&#39;;
+        if ($wsd-&gt;setProxy($proxy)) {
+                print &quot;Proxy [&quot;.$proxy.&quot;] seted!&quot;;
+        } else {
+                print &quot;Proxy not seted! Error [&quot;.$wsd-&gt;error.&quot;]&quot;;
+        }</code></pre>
+
+<p>Set proxy <code>1.2.3.4:8080</code> and protocol http for <code>LWP::UserAgent</code> object.</p>
+
+<h2 id="error"><code>error</code></h2>
+
+<pre><code>        print &quot;Error [&quot;.$wsd-&gt;error.&quot;]&quot; if ($wsd-&gt;isError);</code></pre>
+
+<p>This method return text of last error.</p>
+
+<h2 id="isError"><code>isError</code></h2>
+
+<pre><code>        print &quot;Error [&quot;.$wsd-&gt;error.&quot;]&quot; if ($wsd-&gt;isError);</code></pre>
+
+<p>This method return 1 if $wsd-&gt;{error} not undef, else return 0.</p>
+
+<h2 id="setId"><code>setId</code></h2>
+
+<pre><code>        my $newUserId = time();
+        if ($wsd-&gt;setId($newUserId)) {
+                print &quot;User id [&quot;.$newUserId.&quot;] seted!&quot;;
+        } else {
+                print &quot;User id not seted! Error [&quot;.$wsd-&gt;error.&quot;]&quot;;
+        }</code></pre>
+
+<p>This method set new gyazo user id.</p>
+
+<h2 id="uploadFile"><code>uploadFile</code></h2>
+
+<pre><code>        my $result = $upAgent-&gt;uploadFile(&#39;1.jpg&#39;);
+
+        if (defined($result) and !$upAgent-&gt;isError) {
+                print &quot;Returned result[&quot;.$result-&gt;getImageUrl().&quot;]\n&quot;;
+        } else {
+                print &quot;Error:\n&quot;.$upAgent-&gt;error().&quot;\n\n&quot;;
+        }</code></pre>
+
+<p>This metod return object WebService::Gyazo::Image.</p>
+
+<h1 id="SUPPORT">SUPPORT</h1>
+
+<p>You can find documentation for this module with the perldoc command.</p>
+
+<pre><code>    perldoc WebService::Gyazo</code></pre>
+
+<h1 id="SEE-ALSO">SEE ALSO</h1>
+
+<p><a>WebService::Gyazo::Image</a>, <a>LWP::UserAgent</a>.</p>
+
+<h1 id="AUTHOR">AUTHOR</h1>
+
+<p>SHok, &lt;shok at cpan.org&gt; (<a href="http://nig.org.ua/">http://nig.org.ua/</a>)</p>
+
+<h1 id="COPYRIGHT">COPYRIGHT</h1>
+
+<p>Copyright 2013-2014 by SHok</p>
+
+<p>This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself.</p>
+
+
+</body>
+
+</html>
+
+
