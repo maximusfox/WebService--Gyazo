@@ -10,7 +10,7 @@ use LWP::Protocol::socks;
 use HTTP::Request::Common;
 use URI::Simple;
 
-our $VERSION = 0.01;
+our $VERSION = 0.03;
 
 use constant {
 	HTTP_PROXY => 'http',

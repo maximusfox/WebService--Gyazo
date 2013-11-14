@@ -19,7 +19,9 @@ WriteMakefile(
         'URI::Simple' => 0,
     },
     BUILD_REQUIRES => {
-        'Test::More' => 0.88
+        'Test::More' => 0.88,
+        'Test::Pod'  => 0,
+        'Test::Pod::Coverage' => 0,
     },
     META_MERGE   => {
       requires  => { perl => '5.008008' },
