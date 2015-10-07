@@ -129,7 +129,7 @@ sub uploadFile {
 	$self->{ua}->proxy(['http'], $self->{proxy}.'/') if ($self->{proxy});
 
 	# создаём объект для POST-запроса
-	my $req = POST('http://gyazo.com/upload.cgi',
+	my $req = POST('https://gyazo.com/upload.cgi',
 		'Content_Type' => 'form-data',
 		'Content' => [
 			'id' => $self->{id},
@@ -139,10 +139,10 @@ sub uploadFile {
 
 	# выполняем POST-запрос и проверяем ответ
 	my $res = $self->{ua}->request($req);
-	if (my ($id) = ($res->content) =~ m#http://gyazo.com/(\w+)#is) {
+	if (my ($id) = ($res->content) =~ m#https://gyazo.com/(\w+)#is) {
 		return WebService::Gyazo::Image->new(id => $id);
 	} else {
-		$self->{error} = "Cent parsed URL in the:\n".$res->as_string."\n";
+		$self->{error} = "Cannot parsed URL in the:\n".$res->as_string."\n";
 		return 0;
 	}
 	
