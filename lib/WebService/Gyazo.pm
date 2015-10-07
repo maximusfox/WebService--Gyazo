@@ -97,7 +97,7 @@ sub setId {
 
 # Загружаем файл
 sub uploadFile {
-	my ($self, $file) = @_;
+	my ($self, $filename) = @_;
 
 	# Назначаем ID если он не был назначен
 	unless ($self->{id}) {
@@ -105,19 +105,19 @@ sub uploadFile {
 	}
 	  
 	# Проверяем был ли передан путь к файлу
-	unless (defined $file) {
+	unless (defined $filename) {
 		$self->{error} = 'File parameter was not specified or is undef!';
 		return 0;
 	}
 	
 	# Проверяем, файл ли это
-	unless (-f $file) {
+	unless (-f $filename) {
 		$self->{error} = 'File parameter to uploadFile() was not found!';
 		return 0;
 	}
 
 	# Проверяем возможность считать файл
-	unless (-r $file) {
+	unless (-r $filename) {
 		$self->{error} = 'The file parameter to uploadFile() is not readable!';
 		return 0;
 	}
@@ -133,7 +133,7 @@ sub uploadFile {
 		'Content_Type' => 'form-data',
 		'Content' => [
 			'id' => $self->{id},
-			'imagedata' => [$file],
+			'imagedata' => [$filename],
 		]
 	);
 
