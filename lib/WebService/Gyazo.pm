@@ -106,19 +106,19 @@ sub uploadFile {
 	  
 	# Проверяем был ли передан путь к файлу
 	unless (defined $file) {
-		$self->{error} = 'Wrong file location!';
+		$self->{error} = 'File parameter was not specified or is undef!';
 		return 0;
 	}
 	
 	# Проверяем, файл ли это
 	unless (-f $file) {
-		$self->{error} = 'It\'s not file!';
+		$self->{error} = 'File parameter to uploadFile() was not found!';
 		return 0;
 	}
 
 	# Проверяем возможность считать файл
 	unless (-r $file) {
-		$self->{error} = 'File not readable!';
+		$self->{error} = 'The file parameter to uploadFile() is not readable!';
 		return 0;
 	}
 
