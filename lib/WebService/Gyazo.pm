@@ -97,7 +97,7 @@ sub setId {
 
 # Загружаем файл
 sub uploadFile {
-	my ($self, $file) = @_;
+	my ($self, $filename) = @_;
 
 	# Назначаем ID если он не был назначен
 	unless ($self->{id}) {
@@ -105,20 +105,20 @@ sub uploadFile {
 	}
 	  
 	# Проверяем был ли передан путь к файлу
-	unless (defined $file) {
-		$self->{error} = 'Wrong file location!';
+	unless (defined $filename) {
+		$self->{error} = 'File parameter was not specified or is undef!';
 		return 0;
 	}
 	
 	# Проверяем, файл ли это
-	unless (-f $file) {
-		$self->{error} = 'It\'s not file!';
+	unless (-f $filename) {
+		$self->{error} = 'File parameter to uploadFile() was not found!';
 		return 0;
 	}
 
 	# Проверяем возможность считать файл
-	unless (-r $file) {
-		$self->{error} = 'File not readable!';
+	unless (-r $filename) {
+		$self->{error} = 'The file parameter to uploadFile() is not readable!';
 		return 0;
 	}
 
@@ -129,20 +129,20 @@ sub uploadFile {
 	$self->{ua}->proxy(['http'], $self->{proxy}.'/') if ($self->{proxy});
 
 	# создаём объект для POST-запроса
-	my $req = POST('http://gyazo.com/upload.cgi',
+	my $req = POST('https://gyazo.com/upload.cgi',
 		'Content_Type' => 'form-data',
 		'Content' => [
 			'id' => $self->{id},
-			'imagedata' => [$file],
+			'imagedata' => [$filename],
 		]
 	);
 
 	# выполняем POST-запрос и проверяем ответ
 	my $res = $self->{ua}->request($req);
-	if (my ($id) = ($res->content) =~ m#http://gyazo.com/(\w+)#is) {
+	if (my ($id) = ($res->content) =~ m#https://gyazo.com/(\w+)#is) {
 		return WebService::Gyazo::Image->new(id => $id);
 	} else {
-		$self->{error} = "Cent parsed URL in the:\n".$res->as_string."\n";
+		$self->{error} = "Cannot parsed URL in the:\n".$res->as_string."\n";
 		return 0;
 	}
 	
