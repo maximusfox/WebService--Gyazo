@@ -1,3 +1,5 @@
+# ABANDONED [USE THIS ONE](https://github.com/shlomif/WebService--Gyazo/tree/WebService-Gyazo-B)
+
 WebService::Gyazo
 =================
 WebService::Gyazo - perl image upload library for gyazo.com
