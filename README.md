@@ -1,4 +1,4 @@
-# ABANDONED [USE THIS ONE](https://github.com/shlomif/WebService--Gyazo/tree/WebService-Gyazo-B)
+# ABANDONED [USE THIS ONE](https://github.com/shlomif/WebService--Gyazo/tree/WebService-Gyazo-B) [@shlomif](https://github.com/shlomif) now the new maintainer of [cpan module](https://metacpan.org/pod/WebService::Gyazo::B)
 
 WebService::Gyazo
 =================
